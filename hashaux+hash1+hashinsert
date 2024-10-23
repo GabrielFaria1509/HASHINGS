@@ -2,74 +2,64 @@
 
 using namespace std;
 
-struct dado
-{
+struct dado{
     int k;
     int status;
 };
 
-int hash_aux(int k, int m)
-{ // função //k é o valor que vai entrar no vetor //m é o tamanho do vetor
-    int h = k % m;
-    if (h < 0)
-        h += m;
+int hash_aux(int k , int m){         //função //k é o valor que vai entrar no vetor //m é o tamanho do vetor
+   int h = k % m;
+   if(h < 0) 
+        h+= m;
+        
+    return h;
+
+}
+int hash1(int k , int i , int m){
+    int h = (hash_aux(k,m) + i)%m;
 
     return h;
 }
-int hash1(int k, int i, int m)
-{
-    int h = (hash_aux(k, m) + i) % m;
-
-    return h;
-}
-int hash_insert(dado t[], int m, int k)
-{
+int hash_insert(dado t[], int m, int k){
     int j;
     int i = 0;
-
-    do
-    {
+    
+    do{
         j = hash1(k, i, m);
-        if (t[j].status != 1)
-        {
+        if(t[j].status != 1){
             t[j].k = k;
             t[j].status = 1;
 
             return j;
         }
-        else
-        {
+        else{
             i = i + 1;
         }
-    } while (i != m);
-
+    }while(i!=m);
+    
     return -1;
 }
-int main()
-{
+int main(){
     int k;
     int m;
 
-    cin >> m; // tamanjo da tabela
-
+    cin >> m; //tamanjo da tabela
+    
     dado T[m];
-
-    for (int i = 0; i < m; i++)
-    {A
+    
+    for(int i = 0; i < m; i++){
         T[i].k = -1;
         T[i].status = -1;
     }
-
-    cin >> k; // chaves a serem inseridas
-    while (k != 0)
-    {
+    
+    cin >> k; //chaves a serem inseridas
+    while(k != 0){
         hash_insert(T, m, k);
         cin >> k;
     }
 
-    for (int i = 0; i < m; i++)
-    {
-       A
+    for(int i = 0; i < m; i++){
+        cout << T[i].k << " ";
     }
 
     return 0;
