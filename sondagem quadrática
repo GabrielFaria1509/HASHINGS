@@ -1,0 +1,40 @@
+#include <iostream>
+using namespace std;
+
+int hash_aux(int k, int m)
+{ // função //k é o valor que vai entrar no vetor //m é o tamanho do vetor
+    int h = k % m;
+    
+    if (h < 0)
+        h += m;
+
+    return h;
+}
+
+int hash2(int k , int i, int m , int c1 , int c2){
+    int h  = (hash_aux(k, m) + c1*i + c2*(i*i))%m;
+
+    if(h<0){
+        h+=m;
+    }
+
+    return h;
+}
+
+int main(){
+    int k,m,c1,c2;
+
+    cin>>k;
+    cin>>m;
+    cin>>c1;
+    cin>>c2;
+
+    for(int i=0;i<m;i++){
+        if(i != m - 1)
+            cout << hash2(k,i,m,c1,c2) << " ";
+        else                                       //ultimo elemento não tem espaço em brnaco
+            cout << hash2(k,i,m,c1,c2) << endl;
+    }
+
+    return 0;
+}    
